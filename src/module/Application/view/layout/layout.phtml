@@ -1,0 +1,123 @@
+<?php echo $this->doctype(); ?>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" data-ng-app="ncsolar"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" data-ng-app="ncsolar"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" data-ng-app="ncsolar"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" data-ng-app="ncsolar"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="cleartype" content="on">
+    <?php echo $this->headTitle('DSIRE ')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headMeta()
+                    ->appendName('viewport', 'width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no')
+                    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'href' => $this->basePath() . '/dist/img/favicon.ico'))
+                    ->prependStylesheet($this->basePath() . '/dist/css/print.css', 'print')
+                    ->prependStylesheet($this->basePath() . '/dist/css/style.css')
+                    ->prependStylesheet($this->basePath() . '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css') ?>
+
+                    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<?php echo $this->headScript()
+		->appendFile('/dist/js/head.min.js'); ?>
+</head>
+    <body data-ng-controller="BodyCtrl" data-ng-cloak>
+        <!--[if lt IE 10]><div class="chromeframe">Your browser is ancient! <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</div><![endif]-->
+        <div class="header-container">
+            <header class=" group">
+                <div class="logo">
+                    <a href="<?php echo $this->wpUrl('/'); ?>"><img src="/dist/img/dsire-logo.png" alt="NC Solar"></a>
+                    <a href="http://nccleantech.ncsu.edu/" target="_blank"><img src="/dist/img/ncce-logo.png" alt="NC Clean Energy Technology Center"></a>
+                </div>
+                <div class="share">
+                    <ul>
+                        <li><a href="#" class="toggle">share</a></li>
+                        <li><a href="https://www.facebook.com/DSIREUSA" target="_blank" class="fb">like on facebook</a></li>
+                        <li><a href="https://twitter.com/DSIREUSA" target="_blank" class="twitter">share on twitter</a></li>
+                    </ul>
+                </div>
+                <nav class="primary">
+                    <h2 class="visuallyhidden">Primary Navigation</h2>
+                    <button type="button" class="menu-trigger button">Open Menu</button>
+                    <ul id="menu-main-nav" class="flex-container right">
+                        <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-2 current_page_item menu-item-23"><a href="<?php echo $this->wpUrl('/'); ?>">Home</a></li>
+                         <li id="menu-item-20" class="current-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo $this->url('home/system/program'); ?>">Programs</a></li>
+                        <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo $this->wpUrl('/resources/'); ?>">Resources</a></li>
+                        <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19"><a href="<?php echo $this->wpUrl('/support/'); ?>">Help/Support</a></li>
+                        <li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="<?php echo $this->wpUrl('/about-us/'); ?>">About Us</a></li>
+                        <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21"><a href="<?php echo $this->wpUrl('/contact-us/'); ?>">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <nav class="secondary">
+                    <div class="wrapper">
+                        <?php echo $this->mainMenu(); ?>
+                        <div class="utility">
+
+                            <?php echo $this->render('partials/identity'); ?>
+                            <?php if (!$this->zfcUserIdentity()): ?>
+                            <span class="icon-leaf" aria-hidden="true"></span> Programs
+                               <!--  <a class="button logout" href="<?php echo $this->url('zfcuser/login') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>"> <?php echo $this->translate('Log In'); ?> </a> -->
+                            <?php else: ?>
+                                <a class="logout" href="<?php echo $this->url('zfcuser/logout') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>"> <?php echo $this->translate('Log Out'); ?> </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </nav>
+
+            </header>
+        </div>
+        <div class="content-container">
+            <main class="group">
+                <?php echo $this->render('partials/alerts'); ?>
+                <?php echo $this->content; ?>
+            </main>
+        </div>
+        <!-- <div class="footer-container animated fadeInUp">
+            <footer class="wrapper group">
+                <p>&copy; <?php echo date('Y'); ?> AtlanticBT <?php echo $this->translate('All Rights Reserved.') ?></p>
+            </footer>
+        </div> -->
+        <div class="footer-container container">
+            <div class="credits">
+                <div class="wrapper">
+                    <ul>
+                        <li><img src="/dist/img/doe-eere-logo.png" alt="US DOE - Energy Efficiency &amp; Renewable Energy"></li>
+                        <li><img src="/dist/img/ncce-logo-white.png" alt="NC Clean Energy Technology Center"></li>
+                        <li><img src="/dist/img/ncsu-logo-white.png" alt="NC State University"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <footer class="wrapper group">
+                <div><h2>About DSIRE<sup>&reg;</sup></h2>
+                    <div class="textwidget">DSIRE is the most comprehensive source of information on incentives and policies that support renewables and energy efficiency in the United States. Established in 1995, DSIRE is operated by the N.C. Clean Energy Technology Center at N.C. State University and is funded by the U.S. Department of Energy.</div>
+            </div>          
+                <div class="social-bar">
+                    <h2>Follow the DOE</h2>
+                    <ul>
+                        <li><a href="https://www.facebook.com/energygov" title="Facebook" target="_blank"><span class="icon-facebook" aria-hidden="true"></span></a></li>
+                        <li><a href="http://instagram.com/energy" title="Instagram" target="_blank"><span class="icon-instagram" aria-hidden="true"></span></a></li>
+                        <li><a href="https://www.linkedin.com/company/u.s.-department-of-energy" title="LinkedIn" target="_blank"><span class="icon-linkedin" aria-hidden="true"></span></a></li>
+                        <li><a href="https://twitter.com/energy" title="Twitter" target="_blank"><span class="icon-twitter" aria-hidden="true"></span></a></li>
+                        <li><a href="https://www.youtube.com/user/USdepartmentofenergy" title="Youtube" target="_blank"><span class="icon-youtube" aria-hidden="true"></span></a></li>
+                    </ul>                  
+                </div>
+
+                <div class="social-bar">
+                    <h2>Follow NC Clean Energy Technology Center</h2>
+                    <ul>
+                        <li><a href="https://www.facebook.com/NCCleanTech" title="Facebook" target="_blank"><span class="icon-facebook" aria-hidden="true"></span></a></li>
+                        <li><a href="http://instagram.com/nccleantech" title="Instagram" target="_blank"><span class="icon-instagram" aria-hidden="true"></span></a></li>
+                        <li><a href="https://www.linkedin.com/company/nc-clean-energy-technology-center" title="LinkedIn" target="_blank"><span class="icon-linkedin" aria-hidden="true"></span></a></li>
+                        <li><a href="https://twitter.com/nccleantech" title="Twitter" target="_blank"><span class="icon-twitter" aria-hidden="true"></span></a></li>
+                        <li><a href="https://www.youtube.com/user/TheNCSolarCenter" title="Youtube" target="_blank"><span class="icon-youtube" aria-hidden="true"></span></a></li>
+                    </ul>
+                </div>
+
+
+            </footer>
+        </div>
+        <?php echo $this->inlineScript()            
+            ->prependFile('/dist/js/app/controllers/BodyCtrl.js')
+            ->prependFile('/dist/js/scripts.min.js'); ?>
+    </body>
+</html>

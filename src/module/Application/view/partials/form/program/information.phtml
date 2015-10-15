@@ -1,0 +1,22 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+?>
+<div class="fieldset program-info">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+        <dl>
+            <dt>Implementing Sector</dt>
+            <dd data-ng-bind="program.sectorObj.name"></dd>
+            <dt>Category</dt>
+            <dd data-ng-bind="program.categoryObj.name"></dd>
+            <dt>State</dt>
+            <dd data-ng-bind="program.stateObj.name"></dd>
+            <dt>Program Type</dt>
+            <dd data-ng-bind="program.typeObj.name"></dd>
+            <dt>Code</dt>
+            <dd data-ng-bind="program.code"></dd>
+        </dl>
+        <?php echo $this->partial('fzyform/form/children', array('element' => $this->element, 'scope' => $this->scope, 'subform' => $this->subform)); ?>
+    </fieldset>
+</div>

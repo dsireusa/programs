@@ -1,0 +1,74 @@
+#chart_div {
+	min-height:700px;
+	overflow:hidden;
+}
+#chart_div path {
+	// stroke-width:1; 
+	stroke:#fff;
+
+	&:hover {
+		stroke:#fdd726;
+		fill:#fdd726;
+		cursor:pointer;
+	}
+}
+.tooltip {
+	h3 {
+		color:$color_primary;
+		padding-bottom:0;
+		margin-bottom:5px;
+	}
+	
+	width: 200px;
+}
+.google-visualization-tooltip-item:first-child {
+	display:none;
+}
+
+.maps-by-state {
+	position: relative;
+	.export-map {
+		position: absolute;
+		right:0;
+		bottom:0;
+	}
+
+}
+.export-map-container {
+	display:none;
+	position: fixed;
+	background:rgba($color_secondary, 0.5);
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	
+	.wrapper {
+		position: relative;
+		padding:30px;
+		background:$color_tertiary;
+		margin-top: 50px;
+
+		button {
+			position: absolute;
+			right:0;
+			top:0;
+			width: 30px;
+			height: 30px;
+			background:transparent;
+			color:$color_primary;
+			font-size:24px;
+			padding:0;
+			line-height: 1;
+
+			&:hover {
+				background:$color_primary;
+				color:$color_tertiary;
+			}
+		}
+	}
+	&.active {
+		display: block;
+		z-index: 100;
+	}
+}

@@ -1,0 +1,16 @@
+<?php
+	$this->inlineScript()->appendFile('/dist/js/app/services/list.js')
+		->appendFile('/dist/js/app/controllers/contact/IndexCtrl.js');
+$editUrl = $this->url('home/system/contact', array('action' => 'edit'));
+?>
+<div data-ng-controller="IndexCtrl" <?php echo $this->fzyNgInit()->addItems($editUrl); ?>>
+	<div class="wrapper">
+		<div class="action-bar">
+			<h1>Contact Management</h1>
+			<div class="buttons">
+				<a class="button primary" href="<?php echo $editUrl; ?>">New Contact</a>
+			</div>
+		</div>
+		<table datatable="" dt-events dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover has-action contact-table"></table>
+	</div>
+</div>

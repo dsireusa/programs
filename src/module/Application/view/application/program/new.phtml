@@ -1,0 +1,111 @@
+<?php
+$this->inlineScript()->appendFile('/dist/js/app/services/edit.js')
+     ->appendFile('/dist/js/app/services/select2.js')
+     ->appendFile('/dist/js/app/services/select2/states.js')
+	->appendFile('/dist/js/app/services/select2/types.js')
+     ->appendFile('/dist/js/app/controllers/program/NewCtrl.js');
+?>
+<div data-ng-controller="NewCtrl" <?php echo $this->fzyNgInit()->addItems(array(), $this->implementingSectors, $this->categories); ?>>
+	<div class="wrapper new-program">
+		<div class="action-bar">
+			<h1>Create Program</h1>
+			<div class="buttons">
+
+			</div>
+		</div>
+		<form data-ng-submit="save(settings)">
+			<div class="fieldset"data-ng-show="settings.implementingSector.id">
+				<fieldset>
+					<legend><span>Selections</span></legend>
+					<ol>
+						<li data-ng-show="settings.implementingSector.id"><strong>Implementing Sector:</strong> <span data-ng-bind="settings.implementingSector.name"></span> (<button type="button" class="button naked" data-ng-click="clearSettingKeys(['implementingSector','category','state', 'entireState','type'])">edit</button>)</li>
+						<li data-ng-show="settings.category.id"><strong>Category:</strong> <span data-ng-bind="settings.category.name"></span> (<button type="button" class="button naked" data-ng-click="clearSettingKeys(['category','state', 'entireState','type'])">edit</button>)</li>
+						<li data-ng-show="settings.state.id"><strong>State:</strong> <span data-ng-bind="settings.state.name"></span> (<button type="button" class="button naked" data-ng-click="clearSettingKeys(['state', 'entireState','type'])">edit</button>)</li>
+						<li data-ng-show="settings.type.id"><strong>Incentive Type:</strong> <span data-ng-bind="settings.type.name"></span> (<button type="button" class="button naked" data-ng-click="clearSettingKeys(['type'])">edit</button>)</li>
+                        <li data-ng-show="settings.name"><strong>Program Name:</strong> <span data-ng-bind="settings.name"></span> (<button type="button" class="button naked" data-ng-click="clearSettingKeys(['name'])">edit</button>)</li>
+					</ol>
+				</fieldset>
+			</div>
+			<div class="fieldset" data-ng-hide="settings.implementingSector.id">
+				<fieldset>
+					<legend><span>Choose an implementing sector</span></legend>
+					<div class="fieldset radios">
+						<fieldset>
+							<ul data-ng-show="!loadingSectors && sectors.length">
+								<li class="field exception" data-ng-repeat="sector in sectors" data-ng-click="settings.implementingSector = sector">
+									<input type="radio" data-ng-checked="settings.implementingSector == sector" />
+									<label data-ng-bind="sector.name"></label>
+								</li>
+							</ul>
+							<div data-ng-hide="loadingSectors || sectors.length">
+								<em>No sectors to display</em>
+							</div>
+						</fieldset>
+					</div>
+				</fieldset>
+			</div>
+			<div class="fieldset" data-ng-hide="!settings.implementingSector.id || settings.category.id">
+				<fieldset>
+					<legend><span>Choose a category</span></legend>
+					<div class="fieldset radios">
+						<fieldset>
+							<ul data-ng-show="!loadingCategories && categories.length">
+								<li class="field exception" data-ng-repeat="category in categories" data-ng-click="settings.category = category">
+									<input type="radio" data-ng-checked="settings.category == category" />
+									<label data-ng-bind="category.name"></label>
+								</li>
+							</ul>
+							<div data-ng-hide="loadingCategories || categories.length">
+								<em>No categories to display</em>
+							</div>
+						</fieldset>
+					</div>
+				</fieldset>
+			</div>
+			<div class="fieldset" data-ng-hide="!settings.category.id || settings.state.id">
+				<fieldset>
+					<legend><span>Choose a state</span></legend>
+					<div>
+						<div class="fieldset checkboxes">
+							<fieldset data-ng-show="settings.implementingSector.name == 'State'">
+								<ul>
+									<li class="field exception">
+										<input type="checkbox" data-ng-checked="getEntireState()" data-ng-click="toggleEntireState()" name="entireState" id="entireState"/>
+										<label for="entireState">Incentive applies to entire state</label>
+									</li>
+								</ul>
+							</fieldset>
+						</div>
+						<div class="field">
+							<input type="hidden" data-ui-select2="stateOptions" data-ng-model="settings.state" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="fieldset" data-ng-hide="!settings.state.id || settings.type.id">
+				<fieldset>
+					<legend><span>Choose an incentive type</span></legend>
+					<div>
+						<div class="field">
+							<input type="hidden" data-ui-select2="typeOptions" data-ng-model="settings.type" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+            <div class="fieldset" data-ng-hide="!settings.type.id">
+                <fieldset>
+                    <legend><span>Choose a program name</span></legend>
+                    <div>
+                        <div class="field">
+                            <label for="name">Program Name:</label>
+                            <input name="name" type="text" data-ng-model="settings.name" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
+			<button type="submit" data-ng-disabled="saving" class="btn primary" data-ng-show="settings.name">Continue</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,179 @@
+<?php
+$this->inlineScript()->appendFile('/dist/js/app/controllers/program/DetailsPageCtrl.js')
+    ->appendFile('/dist/js/app/controllers/program/MemoCtrl.js')
+    ->appendFile('/dist/js/app/directives/onLastRepeat.js')
+    ->appendFile('/dist/js/app/directives/equalHeights.js')
+    ->appendFile('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54ad9f362e60de71', 'text/javascript', array('async' => 'async'));
+/* @var $entity \Application\Entity\Base\ProgramInterface */
+?>
+<div data-ng-controller="DetailsPageCtrl"<?php echo $this->fzyNgInit()->addItems(array(
+    'program' => $this->entity,
+    'programLastUpdated' => $this->programLastUpdated,
+    'contacts' => $this->contacts,
+    'technologiesByEnergyCategory' => $this->technologiesByEnergyCategory,
+    'sectors' => $this->sectors,
+    'utilities' => $this->utilities,
+    'counties' => $this->counties,
+    'cities' => $this->cities,
+    'zipCodes' => $this->zipCodes,
+    'details' => $this->details,
+    'parameterSets' => $this->parameterSets,
+    'authorities' => $this->authorities,
+    'subscribeToProgramUrl' => $this->subscribeToProgramUrl
+)); ?>>
+    <div class="action-bar wrapper">
+        <h1>{{ program.name }}</h1>
+    </div>
+    <div class="status-bar">
+        <div class="msg wrapper"><p>{{ msgWrapperText }}</p></div>
+    </div>
+    <div class="wrapper program-detail">
+        <h2>Program Overview <?php if ($this->fzyAllowed()->toController('Application\Controller\Program', 'edit')) { ?><a href="/system/program/edit/{{ program.id }}" class="edit-program" title="Edit Program"><span class="icon-pencil"></span></a><?php } ?></h2>
+        <div class="programOverview">
+            <ul equal-heights="detail-overview">
+                <li data-ng-repeat="field in programFields" data-ng-if="field.getValue()">
+                    <div>{{ field.label }}:</div>
+                    <div data-ng-if="field.type == 'link'" on-last-repeat="detail-overview"><a href="{{ field.getValue() }}">{{ field.getValue() }}</a></div>
+                    <div data-ng-if="field.type != 'link'" data-ng-bind-html="field.getValue()" on-last-repeat="detail-overview" data-ng-init="fakeLastRepeat('detail-overview')"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="programParameterSets" data-ng-if="parameterSets.length" data-ng-class="{'active': displayParameters}">
+            <h2>Incentives</h2>
+            <div class="wrapper-small">
+                <span class="open-incentives" data-ng-click="toggleDisplayParameters('detail-incentives')" data-ng-class="{'active': displayParameters}">This program has {{ parameterSets.length }} Incentives</span>
+                <!-- <a href data-ng-click="toggleDisplayParameters('detail-incentives')" data-ng-bind="displayParameters && 'Hide' || 'Show'"></a> -->
+            </div>
+            <div class="parameterSet" data-ng-repeat="parameterSet in parameterSets" data-ng-show="displayParameters">
+                <ul equal-heights="detail-incentives">
+                    <li data-ng-repeat="field in parameterSet" data-ng-if="field.getValue()">
+                        <div>{{ field.label }}:</div>
+                        <div on-last-repeat="detail-incentives">{{ field.getValue() }}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h2>Summary</h2>
+        <div class="programSummary" data-ng-bind-html="program.summary"></div>
+
+        <div class="authorities" data-ng-if="authorities.length">
+            <h2>Authorities</h2>
+            <div data-ng-repeat="authority in authorities">
+                <ul equal-heights="detail-authority">
+                    <li data-ng-if="authority.code" data-ng-init="fakeLastRepeat('detail-authority')">
+                        <div >
+                            Name:
+                        </div>
+                        <div>
+                            <a data-ng-href="{{ authority.website }}" data-ng-bind="authority.code"></a>
+                        </div>
+                    </li>
+                    <li data-ng-if="authority.upload.fileName" data-ng-init="fakeLastRepeat('detail-authority')">
+                        <div>
+                            Associated File:
+                        </div>
+                        <div>
+                            <a data-ng-href="{{ authority.upload.url }}" data-ng-bind="authority.upload.fileName"></a>
+                        </div>
+                    </li>
+                    <li data-ng-if="authority.enactedDateDisplay" data-ng-init="fakeLastRepeat('detail-authority')">
+                        <div>
+                            Date Enacted:
+                        </div>
+                        <div>
+                            {{ authority.enactedDateDisplay }}
+                        </div>
+                    </li>
+                    <li data-ng-if="authority.effectiveDateDisplay" data-ng-init="fakeLastRepeat('detail-authority')">
+                        <div>
+                            Effective Date:
+                        </div>
+                        <div>
+                            {{ authority.effectiveDateDisplay }}
+                        </div>
+                    </li>
+                    <li data-ng-if="authority.expiredDateDisplay" data-ng-init="fakeLastRepeat('detail-authority')">
+                        <div>
+                            Expiration Date:
+                        </div>
+                        <div>
+                            {{ authority.expiredDateDisplay }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contacts-share">
+            <div class="contacts" data-ng-if="contacts.length">
+                <h2>Contact</h2>
+                <div data-ng-repeat="contact in contacts" data-ng-if="contact.webVisible">
+                    <ul>
+                        <li>
+                            <div data-ng-if="contact.contact.firstName || contact.contact.lastName">
+                                <a data-ng-if="contact.contact.websiteUrl" href="{{ contact.contact.websiteUrl }}">{{ contact.contact.firstName+' '+contact.contact.lastName }}</a>
+                                <span data-ng-if="!contact.contact.websiteUrl" >{{ contact.contact.firstName+' '+contact.contact.lastName }}</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div data-ng-if="contact.contact.organizationName">
+                                Organization:
+                            </div>
+                            <div data-ng-if="contact.contact.organizationName">
+                                {{ contact.contact.organizationName }}
+                            </div>
+                        </li>
+                        <li>
+                            <div data-ng-if="contact.contact.address">
+                                Address:
+                            </div>
+                            <div data-ng-if="contact.contact.address">
+                                {{ contact.contact.address }} <br />
+                                {{ contact.contact.city }}, {{ contact.contact.stateObject.abbreviation }} {{ contact.contact.zip }}
+                            </div>
+                        </li>
+                        <li>
+                            <div data-ng-if="contact.contact.phone">
+                                Phone:
+                            </div>
+                            <div data-ng-if="contact.contact.phone">
+                                {{ contact.contact.phone }}
+                            </div>
+                        </li>
+                        <li>
+                            <div data-ng-if="contact.contact.email">
+                                E-Mail:
+                            </div>
+                            <div data-ng-if="contact.contact.email">
+                                <a href="mailto:{{ contact.contact.email }}">{{ contact.contact.email }}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="share-box">
+                <h2>Share</h2>
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_sharing_toolbox"><a class="rss button primary" href="{{ subscribeToProgramUrl }}"><span class="icon-feed"></span></a></div>
+            </div>
+            <div data-ng-controller="MemoCtrl" class="memo-container">
+                <h2>Memos</h2>
+                <span data-ng-init="toggleDisplayMemos()" data-ng-show="loading && !displayMemos">Loading...</span></a>
+                <ul data-ng-show="displayMemos">
+                    <li data-ng-repeat="memo in memos">
+                        <div>
+                            <span data-ng-bind="memo.dateAdded|date:'shortDate'"></span> by <span data-ng-bind-template="{{memo.author.firstName}} {{memo.author.lastName}}"></span>
+                        </div>
+                        <div data-ng-bind-html="memo.memo" data-ng-hide="memo.editing"></div>
+                    </li>
+                    <li data-ng-show="loading">Loading memos...</li>
+                    <li data-ng-if="memos.length == 0 && !loading" >No memos</li>
+                    <li data-ng-if="meta && meta.total && meta.total > memos.length && !loading" data-ng-click="loadMore()">Load More</li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()->appendFile('/dist/js/app/directives/flyout-menu.js')
+    ->appendFile('/dist/js/app/controllers/program/ProgramContactCtrl.js');
+
+?>
+<div class="fieldset contacts" data-ng-controller="ProgramContactCtrl">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field">
+            <div data-ng-repeat="programContact in program.contacts">
+                <span data-ng-bind="service.getName(programContact.contact)"></span> 
+                <div class="contact-visible">
+                    <input type="checkbox" data-ng-model="programContact.webVisible" data-ng-disabled="saving" /> <label data-ng-click="!saving && (programContact.webVisible = !programContact.webVisible)">Visible to Public</label>
+                </div>
+                <div class="contact-controls">
+                    <button class="button edit" data-ng-click="editContactForm(programContact.contact)" title="Edit Contact" data-ng-disabled="saving"><span class="icon-pencil"></span></button>
+                    <button class="button naked remove" type="button" data-ng-click="removeProgramContact($index)" data-ng-disabled="saving">&times;</button>
+                </div>
+                
+            </div>
+            <div>
+                <input type="hidden" data-ng-model="contact" data-ui-select2="contactOptions" data-ng-disabled="saving"  />
+                <button class="button primary" data-ng-click="openNewContactForm()" data-ng-disabled="saving">Add New Contact</button>
+            </div>
+        </div>
+    </fieldset>
+
+</div>

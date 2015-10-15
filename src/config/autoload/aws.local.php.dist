@@ -1,0 +1,27 @@
+<?php
+
+return array(
+	'aws' => array(
+		'key' => 'AKIAJBXB75KHBI5JHVFA',
+        'secret' => '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',
+		'region' => 'us-east-1',
+
+
+	),
+	'aws_services' => array(
+		's3' => array(
+			'key' => 'AKIAJBXB75KHBI5JHVFA',
+            'secret' => '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',
+			'bucket' => 'ncsolarcen-develop',
+			'environment_prefix' => 'johnf',
+		),
+		'ses' => array(
+			'key' => 'AKIAJBXB75KHBI5JHVFA',
+            'secret' => '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',
+			'region' => 'us-east-1',
+		),
+		'dynamodb' => array(
+			'table' => 'sessions',
+		),
+	),
+);

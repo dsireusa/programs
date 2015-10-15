@@ -1,0 +1,54 @@
+<?php
+$this->inlineScript()->appendFile('/dist/js/app/controllers/program/ParameterSetCtrl.js');
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+/* @var $form \Zend\Form\Form */
+$form = $element->getParentForm()->getZendFormElement();
+?>
+<div class="fieldset combos-parameters">
+    <fieldset data-ng-controller="ParameterSetCtrl" <?php echo $this->fzyNgInit()->addItems($form->getOption('params_units')); ?>>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field parameter-set" data-ng-repeat="parameterSet in program.parameterSets">
+            <h2>Technology &amp; Sector Combination</h2>
+            <div class="options-container">
+                <div class="tech-options"><input type="hidden" data-ui-select2="selectedTechnologyOptions" multiple data-ng-model="parameterSet.technologies" data-ng-disabled="saving" /></div>
+                <div class="sector-options"><input type="hidden" data-ui-select2="selectedSectorOptions" multiple data-ng-model="parameterSet.sectors" data-ng-disabled="saving" /></div>
+            </div>
+            <div class="combinations">
+                <h3>Choose Parameters</h3>
+                <div class="param-options" data-ng-repeat="parameter in parameterSet.parameters" data-ng-controller="ParameterCtrl">
+                    
+                    <div class="field">
+                        <select data-ui-select2="{minimumResultsForSearch:5}" data-ng-model="parameter.source" data-ng-disabled="saving">
+                            <?php foreach ($form->getOption('params_sources') as $value) {
+                                ?><option value="<?php echo $value; ?>"><?php echo $value; ?></option><?php
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <select data-ui-select2="{minimumResultsForSearch:5}" data-ng-model="parameter.qualifier" data-ng-disabled="saving">
+                            <?php foreach ($form->getOption('params_qualifiers') as $value => $label) {
+                                ?><option value="<?php echo $value; ?>"><?php echo $label; ?></option><?php
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <input type="text" data-ng-model="parameter.amount" placeholder="Amount" data-ng-disabled="saving" />
+                    </div>
+                    <div class="field">
+                        <select data-ui-select2="{minimumResultsForSearch:5}" data-ng-model="parameter.units" data-ng-disabled="saving">
+                            <option value="">Units</option>
+                            <option data-ng-repeat="unit in units" value="{{ unit }}" data-ng-bind="unit"></option>
+                        </select>
+                    </div>
+                    <button type="button" class="button naked remove" data-ng-click="removeParameter(parameterSet, $index)" data-ng-disabled="saving">&times;</button>
+                </div>
+                <a href data-ng-click="!saving && addParameter(parameterSet)" data-ng-disabled="saving">Add Parameter</a>
+                <button class="button naked remove remove-set" type="button" data-ng-click="removeParameterSet(parameterSet, $index)" data-ng-disabled="saving">&times;</button>
+            </div>
+        </div>
+        <a href data-ng-click="!saving && addParameterSet()" data-ng-disabled="saving">Add a Technology &amp; Sector Combination</a>
+    </fieldset>
+
+</div>

@@ -1,0 +1,46 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()->appendFile('/dist/js/app/controllers/program/CoverageCtrl.js')
+    ->appendFile('/dist/js/app/services/select2/cities.js')
+    ->appendFile('/dist/js/app/services/select2/counties.js')
+    ->appendFile('/dist/js/app/services/select2/utilities.js')
+    ->appendFile('/dist/js/app/services/select2/zip-code.js');
+
+?>
+<div class="fieldset coverage" data-ng-controller="CoverageCtrl" data-ng-init="init()" data-ng-show="hasUtilities||hasCounties||hasCities||hasZips">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field">
+            <ul>
+                <li data-ng-if="hasUtilities" data-ng-click="showUtils = !showUtils" data-ng-class="{'active': showUtils}">
+                    <span>EIA and Utilities</span>
+                    <div data-ng-show="showUtils">
+                        <input type="hidden" data-ng-model="program.utilities" multiple data-ui-select2="utilityOptions" data-ng-disabled="saving"  />
+                    </div>
+                </li>
+                <li data-ng-if="hasCounties" data-ng-click="showCounties = !showCounties" data-ng-class="{'active': showCounties}">
+                    <span>Counties</span>
+                    <div data-ng-show="showCounties">
+                        <input type="hidden" data-ng-model="program.counties" multiple data-ui-select2="countyOptions" data-ng-disabled="saving"  />
+                    </div>
+                </li>
+                <li data-ng-if="hasCities" data-ng-click="showCities = !showCities" data-ng-class="{'active': showCities}">
+                    <span>Cities</span>
+                    <div data-ng-show="showCities">
+                        <input type="hidden" data-ng-model="program.cities" multiple data-ui-select2="cityOptions" data-ng-disabled="saving"  />
+                    </div>
+                </li>
+                <li data-ng-if="hasZips" data-ng-click="showZips = !showZips" data-ng-class="{'active': showZips}">
+                    <span>Zip Codes</span>
+                    <div data-ng-show="showZips">
+                        <input type="hidden" data-ng-model="program.zipcodes" multiple data-ui-select2="zipOptions" data-ng-disabled="saving"  />
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </fieldset>
+
+</div>

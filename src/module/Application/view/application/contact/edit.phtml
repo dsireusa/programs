@@ -1,0 +1,24 @@
+<?php
+$this->inlineScript()->appendFile('/dist/js/app/services/edit.js')
+	->appendFile('/dist/js/app/services/select2.js')
+	->appendFile('/dist/js/app/services/select2/states.js')
+     ->appendFile('/dist/js/app/controllers/contact/EditCtrl.js');
+?>
+<div data-ng-controller="EditCtrl"<?php echo $this->fzyNgInit()->addItems($this->entity); ?>>
+	<div class="wrapper new-contact">
+		<div class="action-bar">
+			<h1 data-ng-bind-template="{{contact.id && 'Edit' || 'Create'}} Contact"></h1>
+			<div class="buttons">
+
+			</div>
+		</div>
+		<?php echo $this->fzyForm($this->form); ?>
+		<div class="action-bar">
+			<div></div>
+			<div class="buttons">
+				<a class="button naked" href="<?php echo $this->url('home/system/contact'); ?>" data-ng-disabled="saving"><?php echo $this->translate('Cancel'); ?></a>
+				<button class="button primary" type="button" data-ng-disabled="saving" data-ng-click="save(contact)">Save Contact</button>
+			</div>
+		</div>
+	</div>
+</div>

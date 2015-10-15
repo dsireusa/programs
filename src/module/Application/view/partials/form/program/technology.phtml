@@ -1,0 +1,32 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()
+    ->appendFile('/dist/js/app/controllers/program/TechCtrl.js')
+    ->appendFile('/dist/js/app/services/select2/technologies.js');
+?>
+<div class="fieldset technology">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field">
+            <ul>
+                <li data-ng-repeat="energyCategory in energyCategories" data-ng-click="open = !open" data-ng-class="{'active': open}">
+                    <span data-ng-bind="energyCategory.name"></span>
+                    <div data-ng-show="open" data-ng-controller="TechCtrl">
+                        <input type="hidden" data-ng-model="technologies" multiple data-ui-select2="technologyOptions" data-ng-disabled="saving"  />
+                    </div>
+                </li>
+                <li data-ng-class="{'active': openAdditional}">
+                    <span data-ng-click="openAdditional = !openAdditional">Additional Technologies</span>
+                    <div data-ng-show="openAdditional">
+                        <em>This will only appear on the program details page</em><br/>
+                        <textarea data-ng-model="program.additionalTechnologies" data-ng-disabled="saving"></textarea>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </fieldset>
+
+</div>

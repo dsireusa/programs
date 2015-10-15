@@ -1,0 +1,364 @@
+//==================================================================
+// Typography Partial
+// Styles for overall typography and misc. content components.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+
+// Custom Fonts
+// =================================================================
+// @include declare-font-face('Font Name', 'font-location-relative-to-fonts-folder');
+
+
+// @import url(//fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,300,400,600);
+
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSans_gdi.eot');
+	src: url('webfonts/OpenSans_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSans_gdi.woff') format('woff'),
+		url('webfonts/OpenSans_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSans_gdi.svg#OpenSans-Regular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSans-Italic_gdi.eot');
+	src: url('webfonts/OpenSans-Italic_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSans-Italic_gdi.woff') format('woff'),
+		url('webfonts/OpenSans-Italic_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSans-Italic_gdi.svg#OpenSans-Italic') format('svg');
+	font-weight: 400;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSans-Light_gdi.eot');
+	src: url('webfonts/OpenSans-Light_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSans-Light_gdi.woff') format('woff'),
+		url('webfonts/OpenSans-Light_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSans-Light_gdi.svg#OpenSans-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSansLight-Italic_gdi.eot');
+	src: url('webfonts/OpenSansLight-Italic_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSansLight-Italic_gdi.woff') format('woff'),
+		url('webfonts/OpenSansLight-Italic_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSansLight-Italic_gdi.svg#OpenSansLight-Italic') format('svg');
+	font-weight: 300;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSans-Semibold_gdi.eot');
+	src: url('webfonts/OpenSans-Semibold_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSans-Semibold_gdi.woff') format('woff'),
+		url('webfonts/OpenSans-Semibold_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSans-Semibold_gdi.svg#OpenSans-Semibold') format('svg');
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+@font-face {
+	font-family:'Open Sans';
+	src: url('webfonts/OpenSans-SemiboldItalic_gdi.eot');
+	src: url('webfonts/OpenSans-SemiboldItalic_gdi.eot?#iefix') format('embedded-opentype'),
+		url('webfonts/OpenSans-SemiboldItalic_gdi.woff') format('woff'),
+		url('webfonts/OpenSans-SemiboldItalic_gdi.ttf') format('truetype'),
+		url('webfonts/OpenSans-SemiboldItalic_gdi.svg#OpenSans-SemiboldItalic') format('svg');
+	font-weight: 600;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+0020-25CA;
+}
+
+// Global
+// =================================================================
+html, body { 
+	color: $base_font_color; 
+	font: 400 #{$base_font_size}/#{$base_line_height} $base_font_family; 
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@include backface-visibility(hidden);
+}
+hr {
+	height: 1px; background-color: #ddd; border: 0;
+	@include rem(margin, 20px 0);
+}
+
+
+// Headings
+// =================================================================
+h1, h2, h3, h4, h5, h6 {
+	// color: $color_primary;
+	font-weight:400;
+}
+h1 {
+	margin: 0;
+	@include rem(font-size, 28px);
+}
+
+
+// Paragraphs
+// =================================================================
+p {}
+strong {}
+
+
+// Links
+// =================================================================
+a {
+	color: $color_primary; text-decoration: none;
+	@include transition(all $animation_speed ease-in-out);
+
+	&:hover {
+		color: $color_secondary;
+	}
+}
+
+
+// Lists
+// =================================================================
+ul, ol, dl {}
+
+
+	// Unordered
+	//--------------------------------------------------------------
+	ul { margin:0; padding:0; list-style:none;}
+	ul li {}
+
+
+	// Ordered
+	//--------------------------------------------------------------
+	ol {}
+	ol li {}
+
+
+	// Definition
+	//--------------------------------------------------------------
+	dl {}
+	dt { font-weight:700;}
+	dd { margin:0;}
+
+
+// Blockquotes
+// =================================================================
+blockquote {}
+
+// Icons
+// =================================================================
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-kk5ur3');
+	src:url('fonts/icomoon.eot?#iefix-kk5ur3') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-kk5ur3') format('woff'),
+		url('fonts/icomoon.ttf?-kk5ur3') format('truetype'),
+		url('fonts/icomoon.svg?-kk5ur3#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil:before {
+	content: "\f040";
+}
+
+.icon-external-link:before {
+	content: "\f08e";
+}
+
+.icon-filter:before {
+	content: "\f0b0";
+}
+
+.icon-paperclip:before {
+	content: "\f0c6";
+}
+
+.icon-floppy-o:before {
+	content: "\f0c7";
+}
+
+.icon-file-pdf-o:before {
+	content: "\f1c1";
+}
+
+.icon-file-word-o:before {
+	content: "\f1c2";
+}
+
+.icon-file-excel-o:before {
+	content: "\f1c3";
+}
+
+.icon-file-powerpoint-o:before {
+	content: "\f1c4";
+}
+
+.icon-file-image-o:before {
+	content: "\f1c5";
+}
+
+.icon-file-archive-o:before {
+	content: "\f1c6";
+}
+
+.icon-life-bouy:before {
+	content: "\f1cd";
+}
+
+.icon-chevron-right:before {
+	content: "\e618";
+}
+
+.icon-chevron-left:before {
+	content: "\e619";
+}
+
+.icon-linkedin:before {
+	content: "\e600";
+}
+
+.icon-content-copy:before {
+	content: "\e61a";
+}
+
+.icon-stack:before {
+	content: "\e61b";
+}
+
+.icon-user:before {
+	content: "\e605";
+}
+
+.icon-spinner:before {
+	content: "\e606";
+}
+
+.icon-search:before {
+	content: "\e616";
+}
+
+.icon-cog:before {
+	content: "\e607";
+}
+
+.icon-leaf:before {
+	content: "\e608";
+}
+
+.icon-switch:before {
+	content: "\e609";
+}
+
+.icon-menu:before {
+	content: "\e60a";
+}
+
+.icon-globe:before {
+	content: "\e60b";
+}
+
+.icon-earth:before {
+	content: "\e60c";
+}
+
+.icon-info:before {
+	content: "\e60d";
+}
+
+.icon-cancel-circle:before {
+	content: "\e60e";
+}
+
+.icon-checkmark-circle:before {
+	content: "\e60f";
+}
+
+.icon-spam:before {
+	content: "\e610";
+}
+
+.icon-close:before {
+	content: "\e611";
+}
+
+.icon-checkmark:before {
+	content: "\e612";
+}
+
+.icon-minus:before {
+	content: "\e613";
+}
+
+.icon-plus:before {
+	content: "\e614";
+}
+
+.icon-share:before {
+	content: "\e615";
+}
+
+.icon-facebook:before {
+	content: "\e601";
+}
+
+.icon-instagram:before {
+	content: "\e602";
+}
+
+.icon-twitter:before {
+	content: "\e603";
+}
+
+.icon-feed:before {
+	content: "\e61d";
+}
+
+.icon-youtube:before {
+	content: "\e604";
+}
+
+.icon-arrow-down:before {
+	content: "\e617";
+}
+
+.icon-arrow-up:before {
+	content: "\e61c";
+}
+
+
+
+

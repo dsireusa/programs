@@ -1,0 +1,14 @@
+<?php
+    $this->inlineScript()->appendFile('/dist/js/app/controllers/UploadCtrl.js');
+?>
+<span data-ng-controller="UploadCtrl">
+    <?php
+    /* @var $element \FzyForm\Annotation\Field */
+    $element = $this->element;
+    $config = $element->getConfig();
+    $urlString = $config['url'];
+    $model = $element->getFullNgModel();
+    ?>
+    <input type="file" <?php echo $this->fzyNgInit()->addItems($model, $urlString); ?>data-ng-disabled="uploading || saving" data-nv-file-select uploader="uploader" data-ng-hide="<?php echo $model; ?>.key" />
+    <span data-ng-show="<?php echo $model; ?>.key"><a data-ng-href="{{<?php echo $model; ?>.url}}" data-ng-bind="<?php echo $model; ?>.fileName"></a> <span data-ng-hide="saving" data-ng-click="<?php echo $model; ?> = {}">&times;</span></span>
+</span>

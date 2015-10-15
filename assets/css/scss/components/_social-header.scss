@@ -1,0 +1,76 @@
+//==================================================================
+// Social Header Partial
+// Styles for social share buttons in header.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+// Variables
+// =================================================================
+$default-height: 100px;
+$default-width: 50px;
+$small-height: 70px;
+$small-width: $small-height;
+//calculate width based on how many icons are used.
+$expanded-width: $default-width + ($small-width * 2);
+
+.share {
+	@include transition (all 0.2s ease-in-out);
+	height: $default-height;
+	width: $default-width;
+
+	background: #333333;
+	overflow:hidden;
+
+	ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		@include transition (all 0.2s ease-in-out);
+		@include transform(translateY( -($default-height / 2) ));
+
+		li {
+			a {
+				display:inline-block;
+				width: $default-width;
+				height: $default-height / 2;
+				text-indent: -9999px;
+		    	white-space: nowrap;			
+		    }
+		    .toggle {
+				background:#333333 url(../img/social-share.png) no-repeat center;
+		    }
+			.fb {
+				background:#3b5998 url(../img/social-fb.png) no-repeat center;
+			}
+			.twitter {
+				background:#00aced url(../img/social-twitter.png) no-repeat center;
+			}
+		}	
+	}
+
+	.headroom--not-top & {
+		height: $small-height;
+
+		ul {
+			width:$expanded-width;
+			@include transform(translateY(0px));
+			li {
+				float: left;
+				a {
+					width:$small-height;
+					height:$small-height;
+				}
+				&:first-child {
+					a {
+						width:$default-height / 2;
+					}
+				}
+			}
+		}
+		
+		&:hover,
+		&:focus {
+			width:$expanded-width;	
+		}
+	}
+}

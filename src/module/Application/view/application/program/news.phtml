@@ -1,0 +1,36 @@
+<?php
+	$this->inlineScript()->appendFile('/dist/js/app/controllers/program/NewsCtrl.js');
+?>
+<div data-ng-controller="NewsCtrl" data-breakpoints <?php echo $this->FzyNgInit()->AddItems($this->viewModel()->getCurrent()->getVariables())?> >
+    
+    <div class="wrapper action-bar">
+		<h1>News</h1>
+    </div>
+
+    <div class="status-bar">
+        <div class="msg wrapper"><p>Read or follow all program news.</p></div>
+    </div>
+        
+    <div class="wrapper news-page">
+        <div class="news-primary">
+            <ul>
+                <li data-ng-repeat="update in programUpdates">
+                    <div>
+                        <a href="{{ update.detail }}"><h3>{{ update.program }}</h3></a>
+                            <span class="state">
+                                {{ update.state }}
+                            </span>
+                            <span>
+                                Date added: {{ update.dateAdded }}
+                            </span>
+                            <p class="memo" data-ng-bind-html="update.memo"></p>
+                        <a class="rss button primary" href="{{ update.subscribe }}">Subscribe to Program Feed <span class="icon-feed"></span></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="news-sidebar">
+            <a class="button primary" href="{{ subscribeToAllProgramsUrl }}">Subscribe to All-Programs Feed <span class="icon-feed"></span></a>
+        </div>
+    </div>
+</div>

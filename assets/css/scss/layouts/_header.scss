@@ -1,0 +1,292 @@
+//==================================================================
+// Header Partial
+// Styles for header layout.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+// Header
+// =================================================================
+// .header-container {
+// 	position: relative; background: url('../img/bg_login.jpg') no-repeat 50% 50%; background-size: cover;
+
+// 	&:before {
+// 		content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba($color_orient, .85);
+// 	}
+
+// 	.wrapper {
+// 		position: relative;
+// 	}
+
+// 	// Logo
+// 	//--------------------------------------------------------------
+// 	.site-logo {
+// 		float: left;
+// 		@include rem(margin, 20px 0 30px);
+	
+// 		.svg * {
+// 			fill: #fff;
+// 		}
+// 	}
+
+// 	// Primary Nav
+// 	//--------------------------------------------------------------
+// 	.primary {
+// 		clear: both;
+// 		// Additional styles under /components
+// 	}
+
+// 	// Utility Nav
+// 	//--------------------------------------------------------------
+// 	.utility {
+// 		position: absolute; right: 0; color: #fff;
+// 		@include rem(top, 40px);
+	
+// 		// Office
+// 		.office {
+// 			position: relative; float: left;
+// 			@include rem(margin-right, 30px);
+// 			@include rem(line-height, 40px);
+// 		}
+// 		.office .office-toggle {
+// 			margin: 0; vertical-align: text-top;
+// 			@include rem(padding, 2px 8px);
+// 		}
+// 		.office .office-toggle .svg {
+// 			position: relative;
+// 			@include rem(top, -1px);
+// 			@include rem(width, 8px);
+// 			@include rem(height, 8px);
+// 		}
+// 		.office .office-toggle .svg * {
+// 			fill: #fff;
+// 		}
+// 		.office .office-list {
+// 			position: absolute; right: 0; width: auto; padding: 0; margin: 0; background-color: #fff; box-shadow: 0 1px 3px rgba(#000, .25); color: $color_orient; list-style: none; z-index: 100;
+// 			@include rem(padding, 10px);
+// 			@include rem(border-radius, $corners);
+// 		}
+// 		.office .office-list li {
+// 			line-height: 1.5;
+// 			@include rem(margin-top, 8px);
+// 		}
+// 		.office .office-list li:first-child {
+// 			margin: 0;
+// 		}
+// 		.office .office-list li a {
+// 			display: block; white-space: nowrap; cursor: pointer;
+// 			@include rem(padding, 4px 8px);
+// 			@include rem(border-radius, $corners);
+// 		}
+// 		.office .office-list li.selected a {
+// 			background-color: $color_orient; color: #fff;
+// 		}
+
+// 		// User
+// 		.user {
+// 			float: left;
+// 			@include rem(margin-right, 30px);
+// 			@include rem(line-height, 40px);
+// 		}
+
+// 		// Logout
+// 		.logout {
+// 			float: left;
+// 		}
+// 	}
+
+// }
+
+$headerHeight: 150px;
+
+$buttonPrimary: $color_primary;
+$buttonSecondary: $color_tertiary;
+.header-container {
+	background: #fff;
+	left:0;
+	right:0;
+	z-index: 300;
+	@include transition (all 0.2s linear);
+	.logo {
+		float:left;
+		font-size: 0;
+		margin-top: 10px;
+		margin-left: 10px;
+		a {
+			display: inline-block;
+			img {
+				@include transition (all 0.2s linear);
+				padding:20px;
+			}
+			&:first-child {
+				img {
+					display: inline-block;
+					
+					padding-left:0;
+					border-right: 1px solid #000;
+				}
+			}
+		}
+
+		
+	}
+	
+	nav.primary { 
+		width:55%; 
+		float:right; 
+		margin-right:50px;
+		margin-top:30px;
+		@include transition (margin 0.2s linear);
+
+		button {
+			@include transition (all 0.2s linear);
+			display:none;
+			background:$buttonPrimary;
+			height:45px;
+			width: 48px;
+			top: 25px;
+			right: 20px;
+			overflow: hidden;
+			position: absolute;
+			cursor: pointer;
+			outline: none;
+			text-indent: -9999px;
+			&:after {
+				content: '';
+				position: absolute;
+				width: 68%;
+				height: 5px;
+				background: $buttonSecondary;
+				top: 10px;
+				left: 16%;
+				box-shadow: 0 10px 0 $buttonSecondary, 0 20px 0 $buttonSecondary;
+			}
+		}
+
+		@include media(max-width 960px) {
+			// position:fixed;
+			// width:100%;
+			// top: 0;
+			// margin-top: 0;
+			// right: 0;
+			// z-index: 100;
+
+			// button {
+			// 	display:block;
+			// }
+			// > ul {
+				// @include transition (all 0.3s linear);
+				// background:$color_4;
+				// overflow: hidden;
+				// max-height:0;
+				// position: absolute;
+				// right: -50px;
+				// width: 100%;
+				// top:100px;
+				// padding:0;
+				// text-align: center;
+				
+				// .nav-menu-active & {
+				// 	max-height:1000px;
+				// }
+
+				// >li {
+				// 	display: inline-block;
+				// 	@include span-columns(3);
+				// 	font-size: 1em;
+
+				// 	a {
+				// 		display: inline-block;
+				// 		width:100%;
+
+				// 		// float: none;
+				// 		padding: 20px 0;
+				// 	}
+				// 	&:nth-child(3n-2) {
+				// 		@include shift(1.5);
+				// 		border-left:none;
+				// 	}
+				// }
+
+			// }
+		}
+	}
+	.share { 
+		position: absolute;
+		right:0;
+		z-index: 500;
+	}
+	
+	header {
+		@include transition (all 0.2s linear);
+		position: relative;
+		overflow: hidden;
+		height: $headerHeight;
+		// padding: 0 10px;
+		.page-template-page-secondary-php & {
+			height: $headerHeight+40px;
+		}
+	}
+}
+
+
+
+.headroom {
+    
+   
+}
+.headroom--pinned {
+    // @include transform(translateY(0%));
+
+}
+body.headroom--unpinned {
+    // @include transform(translateY(-100%));
+
+    .content-container {
+		padding-top: $headerHeight;
+    }
+    .header-container {
+		position:fixed;
+		header {
+			height:70px;
+			.logo {
+				margin-top: 5px;
+
+				img {
+					padding-top:5px;
+					padding-bottom: 5px;
+				}
+			}
+		}
+		
+		nav.primary { 
+			@include media(1024px) {
+				margin-top:15px;
+			}
+			> ul {
+				top:70px;
+				.sub-menu {
+					top:70px;
+				}
+			}
+
+			button {
+				top: 10px;
+			}
+		}
+	}
+	&.page-template-page-secondary-php  {
+		.content-container {
+			padding-top: $headerHeight + 40px;;
+    	}
+    	.header-container header {
+    		height:70px;
+		}
+	}
+	
+}
+.headroom--not-top {
+
+	
+	
+	
+}

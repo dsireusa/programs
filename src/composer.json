@@ -1,0 +1,31 @@
+{
+	"name": "NC Solar",
+	"description": "NC Solar Programs Site",
+	"license": "BSD-3-Clause",
+	"keywords": [],
+	"homepage": "http://programs.dsireusa.org/",
+	"require": {
+	    "php": ">=5.3.3",
+	    "zendframework/zendframework": "2.3.5",
+	    "zf-commons/zfc-base": "0.1.2",
+	    "zf-commons/zfc-user": "1.2.2",
+	    "zf-commons/zfc-user-doctrine-orm": "1.0.0",
+	    "doctrine/doctrine-module": "0.8.0",
+	    "doctrine/doctrine-orm-module": "0.8.0",
+	    "zendframework/zendservice-amazon": "2.0.3",
+	    "doctrine/annotations": "1.2.3",
+	    "doctrine/common": "2.4.2",
+        "aws/aws-sdk-php": "2.7.2",
+        "aws/aws-sdk-php-zf2": "1.2.1",
+        "slm/mail": "1.5.0",
+        "guzzlehttp/guzzle": "4.2.2",
+        "abt/common": "dev-master",
+        "abt/form": "dev-master",
+	    "abt/auth": "dev-master",
+        "slm/google-analytics": "~0.4"
+	},
+	"require-dev": {
+        "zendframework/zend-developer-tools": "dev-master",
+		"phpunit/phpunit": "4.1.*"
+	}
+}

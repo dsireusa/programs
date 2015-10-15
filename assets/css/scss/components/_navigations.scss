@@ -1,0 +1,406 @@
+//==================================================================
+// Navigations Partial
+// Styles for various types of navigation componenets.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+
+
+
+// // Secondary Navigation
+// // =================================================================
+nav.secondary {
+    // @include rem(margin, 0 0 0 40px);
+    background:$color_7;
+    margin-top: 100px;
+    overflow: auto;
+    ul {
+        padding: 0; margin: 0; list-style: none;
+        display: inline-block;
+        float:right;
+    
+        li {
+            display: inline-block;
+            @include rem(margin-left, 20px);
+
+        }
+        li:first-child {
+            margin: 0;
+        }
+        li a {
+            display: inline-block;
+            height:50px;
+            line-height: 50px;
+            color: #fff;
+            @include transition(all $animation_speed ease-in-out);
+        }
+
+        // Hover
+        //--------------------------------------------------------------
+        li:hover a {
+            color: rgba(#fff, .75);
+        }
+
+        // Current
+        //--------------------------------------------------------------
+        li.current a {
+            background-color: #fff; color: $color_orient;
+            @include rem(padding, 4px 10px);
+            @include rem(border-radius, $corners);
+        }
+    }
+}
+
+nav.primary {
+    // font-weight:400;
+    ul {    
+        margin:0;
+        padding:0;
+    }
+
+}
+.utility {
+    color:#fff;
+    display:inline-block;
+    padding: 15px 0;
+    a {
+        color: #fff;
+    }
+    .user {
+        display: inline-block;
+    }
+}
+
+.flex-container {
+    margin:0;
+    padding:0;
+    list-style: none;
+    
+    &ul {
+        font-size: 0;
+    }
+
+    li {
+        display: inline-block;
+        font-size: 1em;
+        @include media(1088px) {
+            // font-size: 1em;
+        }
+        a {
+            
+            color: #333;
+            text-decoration: none;
+            float: left;
+            padding:0.5em;
+            // line-height:4em;
+            
+        }
+    }
+    .sub-menu {
+        @include transition (all 0.2s linear);
+        display:none;
+        position:fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        list-style:none;
+        background: $color_7;
+        li {
+            display: inline-block;
+            text-align: left;
+            a {
+                color:$color_tertiary;
+            }
+        
+        }
+    }
+    .current_page_item,
+    .current_page_ancestor {
+        .sub-menu {
+            display:block;
+
+            li:first-child {
+                text-align: left;
+                float: left;
+                padding-left:40px;
+            }
+        }
+    }
+    .current-menu-item {
+        font-weight: 600;
+        ul li {
+            font-weight:300;
+            &.current-menu-item {
+                font-weight: 400;
+            }
+        }
+    }
+    
+    .styleguide & {
+        background: #fff;
+    }
+    &.secondary {
+        li a {
+            padding:0.5em;
+            line-height: 3em;
+        }
+    }
+  
+}
+
+.right {
+    // @include justify-content(flex-end);
+    text-align:right;
+} 
+.no-scroll {
+    overflow:hidden;
+}
+.inner-panel-close {
+    background:rgba(0,0,0,0.5);
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    cursor:pointer;
+}
+.flyout-menu {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width:100%;
+    overflow: hidden;
+    background:rgba(0,0,0,0);
+    z-index:-1;
+    $panelWidth:300px;
+
+    &.hide-load {
+        display: none;
+    }
+    .field {
+        margin:0;
+    }
+    &.active {
+        background:rgba(0,0,0,0.5);
+        z-index: 500;
+        [data-level] {
+            display:block;
+        }
+    }
+    h3 {
+        height:70px;
+        padding:20px;
+        margin: 0;
+    }
+    h4 {
+        margin: 0;
+        padding:10px 20px;
+    }
+    ul, div {
+        // display:none;
+    }
+    [data-level] {
+        // display:block;
+        position:absolute;
+        right:0;
+        top: 0;
+        bottom:0;
+        min-width: $panelWidth;
+        background:$color_4;
+        @include transition (all 0.2s linear);
+        @include transform(translateX($panelWidth));
+        border-left: 3px solid #cc0000;
+
+        &.active {
+            @include transform(translateX(0px));
+            z-index: 501;
+        }
+    }
+
+    &[data-level-active="2"] {
+        [data-level="1"] {
+            margin-right: 40px;
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }           
+        }
+        [data-level="2"] {
+            @include transform(translateX(40px));
+        }
+    }
+    &[data-level-active="3"] {
+        [data-level="1"] {
+            margin-right: 80px;
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }   
+        }
+        [data-level="2"] {
+            @include transform(translateX(40px));
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }
+        }
+        [data-level="3"] {
+            @include transform(translateX(40px));
+        }
+    }
+    &[data-level-active="4"] {
+        [data-level="1"] {
+            margin-right: 120px;
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }   
+        }
+        [data-level="2"] {
+            @include transform(translateX(40px));
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }
+        }
+        [data-level="3"] {
+            @include transform(translateX(40px));
+            > ul > .close-btn {
+                @extend .inner-panel-close;
+            }
+        }
+        [data-level="4"] {
+            @include transform(translateX(40px));
+        }
+    }
+
+    nav {
+        ul {
+            margin:0;
+            padding:0;
+            list-style: none;
+            max-height: calc(100% - 147px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            li {
+                display: block;
+                border-bottom:1px solid #333;
+                input {
+                    width: 100%;
+                }
+                .apply-filters-btn {
+                    width: 100%;
+                    background: $color_primary;
+                    margin: 0;
+                    position: absolute;
+                    bottom:0;
+                }
+                &.disabled {
+                    background: darken($color_4, 10%);
+                    span {
+                        font-style: italic;
+                        font-weight: 400;
+                    }
+                    a {
+                        cursor: default;
+                        &:hover {
+                            background: transparent;
+                        }
+                    }
+                }
+                label {
+                    &:hover {
+                        background: lighten(#c1c1c1, 10%);
+                    }
+                }
+            }
+        }
+        a {
+            text-decoration: none;
+            padding:10px 20px;
+            display: block;
+            color: #000;
+            &:hover {
+                background: darken(#c1c1c1, 10%);
+            }
+        }
+        &:hover {
+            background: darken(#c1c1c1, 10%);
+        }
+    }
+    .close-btn {
+        position: absolute;
+        top:20px;
+        right:10px;
+        border:none;
+        
+        button {
+            position:relative;
+            width: 25px;
+            height: 25px;
+            float: right;
+            background:transparent;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                height: 1px;
+                left: 0;
+                background: #000;
+                // left: -3em;
+                @include transform(rotate(45deg));
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                height: 1px;
+                background: #000;
+                left: 0;
+                @include transform(rotate(-45deg));
+            }
+        }
+        
+    }
+
+    .loader {
+        background: #fff;
+        text-align: center;
+        padding: 10px 20px;
+        
+        span {
+            &:first-child {
+                color:$color_primary;
+                cursor: pointer;
+            }
+        }
+    }
+    h4 {
+        color: #fff;
+        background:#cc0000;
+    }
+    
+}
+
+// Footer Navigation
+// =================================================================
+nav.footer {}
+
+
+// Utility Navigation
+// =================================================================
+nav.utility {}
+
+
+// Breadcrumb Navigation
+// =================================================================
+.breadcrumbs {}
+
+
+// Pagination Navigation
+// =================================================================
+.pagination {}
+
+.pagination span, .pagination a {}
+.pagination span:first-child {}
+.pagination a:hover {}
+.pagination .current {}

@@ -1,0 +1,10 @@
+<?php if ($this->zfcUserIdentity()): ?>
+    <div class="user">
+        <span class="icon-cog" aria-hidden="true"></span>
+        <strong><?php echo $this->translate('Admin'); ?> </strong>
+        <a class="primary" href="<?php echo $this->url('home'); ?>">
+            <?php echo $this->zfcUserIdentity()->getFirstName(); ?>
+            <?php echo $this->zfcUserIdentity()->getLastName(); ?>
+        </a>
+    </div>
+<?php endif; ?>

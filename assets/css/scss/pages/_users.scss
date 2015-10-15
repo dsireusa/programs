@@ -1,0 +1,38 @@
+.user-table {
+	th {
+		text-align:left;
+	}
+}
+.new-user {
+	.radios {
+		margin-bottom: 5px;
+		legend {
+			color: #444444;
+		}
+		li {
+			border:none;
+			display: inline-block;
+		}
+		input[type="radio"] + label {
+			padding: 10px 20px;
+		}
+		
+	}
+
+	.select2-container {
+		width: 197px;
+		border:1px solid #d0d0d0;
+		top: 0;
+		.select2-choice {
+			height: 35px;
+			line-height: 16px;
+			font-size: 14px;
+			abbr {
+				top:12px;
+			}
+		}
+	}
+	.select2-container-active {
+		border:none;
+	}
+}

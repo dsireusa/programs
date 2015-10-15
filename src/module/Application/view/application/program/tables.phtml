@@ -1,0 +1,77 @@
+<?php
+	$this->inlineScript()->appendFile('/dist/js/app/services/select2.js')
+        ->appendFile('/dist/js/app/services/select2/categories.js')
+        ->appendFile('/dist/js/app/services/select2/technologies.js')
+        ->appendFile('/dist/js/app/services/breakpoints.js')
+        ->appendFile('/dist/js/app/controllers/program/TablesCtrl.js')
+        ->appendFile('/dist/js/app/directives/onLastRepeat.js')
+        ->appendFile('/dist/js/app/directives/equalHeights.js');
+?>
+<div data-ng-controller="TablesCtrl" data-breakpoints <?php echo $this->FzyNgInit()->AddItems($this->viewModel()->getCurrent()->getVariables())?> >
+    <div class="action-bar wrapper">
+		<h1>Summary Tables</h1>
+     </div>
+    <div class="status-bar">
+        <div class="msg wrapper"><p>Our summary tables provide an overview of certain incentives and policies that promote renewable energy and energy efficiency in the United States. These tables allow viewers to quickly compare the number and types of incentives and policies in each state.</p></div>
+    </div>
+    <div class="wrapper">
+        <div class="filter-options">
+            <h2>Filter Options</h2>
+            <div>
+                <div>
+                    <h3>Category</h3>
+                    <input id="category_filter" type="hidden" data-ng-model="category" data-ui-select2="categoryOptions" placeholder="All"/>
+                </div>
+                <div>
+                    <h3>Technology</h3>
+                    <input id="technology_filter" type="hidden" data-ng-model="technology" data-ui-select2="technologyOptions" placeholder="All"/>
+                </div>
+            </div>
+        </div>
+    	<div class="tables-by-type" data-ng-show="getProgramsByType().length">
+            <h2>{{ getByTypeHeader() }}</h2>
+            <div>
+                <ul equal-heights="table">
+                    <li data-ng-repeat="programs in programsByType" on-last-repeat="table">
+                        
+                        <a href="{{ getUrlWithFilterParams(programs.url) }}">
+                            <div>
+                                <span>{{ programs.total }}</span>
+                                <span>Total</span>
+                            </div>
+
+                            <div class="type">
+                                <span>{{ programs.type.name }}</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tables-by-state" data-ng-show="getProgramsByState().length">
+            <h2>{{ getByStateHeader() }}</h2>
+            <div class="table-headers">
+                <ul>
+                    <li data-ng-repeat="i in stateHeaderArray track by $index">
+                        <span>State/Territory</span>
+                        <span>Total</span>
+                    </li>
+                </ul>
+            </div>
+            <div >
+                <ul data-ng-repeat="programsContainer in programsByStateContainers">
+                    <li data-ng-repeat="programs in programsContainer">
+                        <a href="{{ getUrlWithFilterParams(programs.url) }}">
+                            <span>{{ programs.state.abbreviation }} - {{ programs.state.name }}</span>
+                            <span>{{ programs.total }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="no-results" data-ng-hide="getProgramsByType().length && getProgramsByState().length">
+            <span>No Results Were Found</span>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,14 @@
+<article>
+    <div class="alert alert-info">
+        <p>The sitemap in XML format can be downloaded <a href="<?= $this->url('sitemap/xml')?>">here</a></p>
+    </div>
+
+    <?= $this->navigation()->menu('Navigation')
+        ->setMinDepth(null)
+        ->setMaxDepth(null)
+        ->setOnlyActiveBranch(false)
+        ->setAcl($this->acl)
+        ->setRole($this->role)
+        ->setRenderInvisible(true)?>
+
+</article>

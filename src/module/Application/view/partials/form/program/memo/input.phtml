@@ -1,0 +1,53 @@
+<?php
+if ($this->element) {
+    $this->inlineScript()->appendFile('/dist/js/app/services/list.js')->appendFile('/dist/js/app/controllers/program/MemoCtrl.js');
+    /* @var $element \FzyForm\Annotation\Field */
+    $element = $this->element;
+    $config = \FzyCommon\Util\Params::create($element->getConfig());
+    ?>
+    <h2><?php echo $config->get('heading', 'Memos'); ?></h2>
+    <?php
+
+    echo $this->partial('fzyform/form/element/wysiwyg', array('element' => $element));
+    ?>
+    <div data-ng-controller="MemoCtrl"<?php echo $this->fzyNgInit()->addItems($config->get('memoType')); ?> class="memo-container" data-ng-class="{'active': displayMemos}">
+        <a href data-ng-click="toggleDisplayMemos()"><span data-ng-show="!loading || displayMemos"><?php echo $config->get('openText', 'Open') ?></span><span data-ng-show="loading && !displayMemos">Loading...</span></a>
+        <ul data-ng-show="displayMemos">
+            <li data-ng-repeat="memo in memos">
+                <div class="memo-header">
+                    <span data-ng-bind="memo.dateAdded|date:'shortDate'"></span> by <span data-ng-bind-template="{{memo.author.firstName}} {{memo.author.lastName}}"></span>
+                    <?php if($this->fzyAllowed()->toController('Application\Controller\Api\Memo', 'update')) {
+                        ?>
+                    <button type="button" class="button edit" data-ng-click="openEditMemo(memo, true)"><span class="icon-pencil"></span></button>
+                    <?php
+                    }
+
+                    if($this->fzyAllowed()->toController('Application\Controller\Api\Memo', 'delete')) {
+                        ?>
+                        <button type="button" class="button naked remove" data-ng-click="deleteOpen = !deletOpen">&times;</button>
+                        <div data-ng-show="deleteOpen">
+                            <div class="alert-box error" data-ng-if="memo.deleteError"
+                                 data-ng-bind="memo.deleteError"></div>
+                            <button type="button" class="button primary" data-ng-click="openDeleteMemo(memo, $index)"
+                                    data-ng-disabled="memo.deleting"
+                                    data-ng-bind="memo.deleting && 'Deleting...' || 'Confirm Delete'"></button>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div data-ng-bind-html="memo.memo" data-ng-hide="memo.editing"></div>
+                <div data-ng-show="memo.editing">
+                    <textarea data-ng-model="memo.memo" data-ng-disabled="saving"></textarea>
+                    <button class="button primary" data-ng-click="updateMemo(memo)" data-ng-disabled="saving">Update</button>
+                </div>
+            </li>
+            <li data-ng-show="loading">Loading...</li>
+            <li data-ng-if="meta && meta.total && meta.total > memos.length && !loading" data-ng-click="loadMore()">Load More</li>
+            <li data-ng-if="meta && meta.total < 1"><em>No memos to display</em></li>
+        </ul>
+    </div>
+<?php
+}
+?>
+

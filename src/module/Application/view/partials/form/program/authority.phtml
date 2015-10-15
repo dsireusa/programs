@@ -1,0 +1,26 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()
+    ->appendFile('/dist/js/app/controllers/program/AuthorityCtrl.js');
+//    ->appendFile('/dist/js/app/services/select2/technologies.js');
+?>
+<div class="fieldset authority-section" data-ng-controller="AuthorityCtrl">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+        <button class="button primary" type="button" data-ng-hide="program.authorities.length" data-ng-click="addAuthority({})">Add Authority</button>
+
+        <div class="authority-group" data-ng-repeat="authority in program.authorities">
+            <h2 data-ng-click="authority.open = !authority.open"><span data-ng-bind="authority.code || 'New Authority'"></span></h2>
+            <div class="authority-controls">
+                <button class="button edit" title="Edit Authority" data-ng-click="authority.open = !authority.open" data-ng-disabled="saving"><span class="icon-pencil"></span></button>
+                <button class="button naked remove" data-ng-click="removeAuthority($index)" data-ng-disabled="saving">&times;</button>
+            </div>
+            <div data-ng-show="authority.open" class="authority-item">
+                <div data-ng-include src="'authority-form'"></div>
+            </div>
+        </div>
+        <a href data-ng-show="program.authorities.length" data-ng-click="!saving && addAuthority({})" data-ng-disabled="saving">Add New Authority</a>
+    </fieldset>
+
+</div>

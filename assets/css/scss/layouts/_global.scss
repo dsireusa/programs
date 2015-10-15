@@ -1,0 +1,66 @@
+//==================================================================
+// Global Partial
+// Styles for global layout.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+// Global Layout
+// =================================================================
+// body {}
+
+// .header-container,
+// .content-container,
+// .footer-container {
+// 	// @include rem(min-width, 1280px);
+// }
+
+// .wrapper {
+// 	margin: 0 auto;
+// 	@include rem(width, 1280px);
+// }
+
+// .outer-container {
+// 	@include outer-container;
+// 	max-width: 100%;
+// }
+// .span-half {
+// 	@include span-columns(6);
+// }
+
+body {
+	-webkit-overflow-scrolling: touch;
+	background: #f2f2f2;
+
+
+}
+
+.header-container,
+.content-container,
+.footer-container {
+
+	.wrapper {
+		@include outer-container;
+		@include media($desktop_wide) {
+			max-width: 1280px;
+		}
+		padding: 0 10px;
+	}
+	
+}
+
+.content-container {
+	// padding-top:100px;
+	h1 {
+		margin: 40px 0;
+		sup {
+			font-size: 18px;
+			font-weight: 300;
+			top: -0.9em;
+		}
+	}
+	.page-template-page-secondary-php & {
+		padding-top:10px;
+	}
+}
+
+.wrapper {}

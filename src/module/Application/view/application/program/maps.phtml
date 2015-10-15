@@ -1,0 +1,49 @@
+<?php
+	$this->inlineScript()->appendFile('/dist/js/app/services/select2.js')
+        ->appendFile('/dist/js/app/services/select2/types.js')
+        ->appendFile('/dist/js/app/services/select2/technologies.js')
+        ->appendFile('/dist/js/app/controllers/program/MapsCtrl.js')
+        ->appendFile('/dist/js/app/directives/summaryMaps.js');
+?>
+<div data-ng-controller="MapsCtrl" data-breakpoints <?php echo $this->FzyNgInit()->AddItems($this->viewModel()->getCurrent()->getVariables())?> >
+    <div class="action-bar wrapper">
+		<h1>Summary Maps</h1>
+     </div>
+    <div class="status-bar">
+        <div class="msg wrapper"><p>DSIRE's summary maps provide a geographical overview of financial incentives and regulatory policies that promote renewable energy and energy efficiency in the U.S. The map is populated in real-time based on the content of the database. Users can select a Program Type and a Technology to see which states have a certain policy or incentive for a particular technology. You can also follow the link below to see DSIRE's more detailed manually-updated summary maps.</p></div>
+    </div>
+    <div class="wrapper">
+        <div class="filter-options">
+            <h2>Filter Options</h2>
+            <div>
+                <div>
+                    <h3>Program Type</h3>
+                    <input id="type_filter" type="hidden" data-ng-model="type" data-ui-select2="typeOptions" placeholder="All"/>
+                </div>
+                <div>
+                    <h3>Technology</h3>
+                    <input id="technology_filter" type="hidden" data-ng-model="technology" data-ui-select2="technologyOptions" placeholder="All"/>
+                </div>
+            </div>
+        </div>
+        <div class="no-results" data-ng-hide="getNumberOfProgramsByState()">
+            <span>No Results Were Found</span>
+        </div>
+        <div class="maps-by-state">
+            <div summary-maps>
+                <div id="chart_div"></div>
+                <button class="export-map button primary">Export Map</button> <a href="<?php echo $this->wpUrl('/resources/detailed-summary-maps/'); ?>" class="button primary">See more detailed summary maps</a>
+            </div>
+        </div>
+        <div class="export-map-container close-trigger">
+            
+            <div class="wrapper">
+                <button class="close-trigger">&times;</button>
+                <img src="" alt='Right click on image and choose "Save Image As" to download image.'/>
+                <p>Right click on image and choose "Save Image As" to download image.</p>
+            </div>
+            
+        </div>
+    </div>
+
+</div>

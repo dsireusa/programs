@@ -1,0 +1,72 @@
+//==================================================================
+// Home Page Partial
+// Styles for the home page.
+// (c) Atlantic BT. All Rights Reserved.
+//==================================================================
+
+.programs-table {
+	.rss-feeds {
+		position: absolute;
+		left: 250px;
+		
+		&:hover {
+
+			.rss-options{
+				display: block;
+			}
+		}
+		.rss-options {
+			display: none;
+			background: $color_7;
+			width: 300px;
+			position:absolute;
+			left: -97px;
+			padding: 10px;
+			&:before {
+				position: absolute;
+				display: block;
+				content:'';
+				top: -8px;
+				left: calc(50% - 5px);
+				border-bottom: 10px solid $color_7;
+				border-right: 10px solid transparent;
+				border-left: 10px solid transparent;
+			}
+			.button {
+				width: 100%;
+				font-weight: 600;
+				margin-bottom: 0;
+				&:last-child {
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+	table tr {
+		td {
+			text-align: center;
+			&:first-child {
+				min-width: 300px;
+				text-align: left;
+				a {	
+					vertical-align: middle;
+					&.edit-program-btn {
+						width: 30px;
+						height: 100%;
+						position: relative;
+						display: inline-block;
+						outline: none;
+						span {
+							position: absolute;
+							top: calc(50% - 10px);
+						}
+					}
+					&:nth-child(2) {
+						display: inline-block;
+						width: calc(100% - 40px);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,45 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()
+    ->appendFile('/dist/js/app/controllers/program/SectorCtrl.js');
+//    ->appendFile('/dist/js/app/services/select2/technologies.js');
+?>
+<div class="fieldset">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field" data-ng-controller="SectorCtrl">
+            <ul>
+                <li data-ng-repeat="sector in sectors">
+                    <div data-ng-include src="sector.template" class="sector-category"></div>
+                </li>
+
+            </ul>
+            <script type="text/ng-template" id="sector-top">
+                <h1 data-ng-bind="sector.name" style="clear:both;"></h1>
+                <a href data-ng-click="selectAll(sector)" class="select-all">Select All</a>
+                <br style="clear:both" />
+                <div data-ng-init="parent=sector" class="sectors-container">
+                    <div data-ng-repeat="sector in sector.children" data-ng-include src="sector.template"></div>
+                </div>
+                <br style="clear:both" />
+            </script>
+            <script type="text/ng-template" id="sector-middle">
+                <div data-ng-init="parent = sector">
+                    <h2 data-ng-bind="sector.name"></h2>
+                    <div data-ng-repeat="sector in sector.children" data-ng-include src="sector.template"></div>
+                </div>
+            </script>
+            <script type="text/ng-template" id="sector-leaf">
+                <div data-ng-click="!saving && (sector.active = !sector.active)" data-ng-controller="SingleSectorCtrl">
+                    <input type="checkbox" data-ng-checked="sector.active" data-ng-disabled="saving" /> <label data-ng-bind="sector.name"></label>
+                </div>
+                <div class="add-sector" data-ng-if="$last">
+                    <input type="text" data-ng-model="newSectorName" placeholder="Add Custom" data-ng-disabled="saving" /> <button type="button" class="button primary" data-ng-click="addCustomSector(newSectorName, parent)" data-ng-disabled="saving">Add</button>
+                </div>
+            </script>
+        </div>
+    </fieldset>
+
+</div>

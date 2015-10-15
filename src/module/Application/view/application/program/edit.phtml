@@ -1,0 +1,95 @@
+<?php
+$this->inlineScript()->appendFile('/dist/js/app/services/edit.js')
+	->appendFile('/dist/js/app/services/select2.js')
+	->appendFile('/dist/js/app/services/select2/states.js')
+    ->appendFile('/dist/js/app/services/select2/contacts.js')
+     ->appendFile('/dist/js/app/controllers/program/EditCtrl.js')
+    ->appendFile('/dist/js/app/controllers/program/NewContactCtrl.js');
+/* @var $entity \Application\Entity\Base\ProgramInterface */
+$entity = $this->entity;
+/* @var $form \Zend\Form\Form */
+$form = $this->form;
+?>
+<div data-ng-controller="EditCtrl"<?php echo $this->fzyNgInit()->addItems($entity, array(
+    'program' => array(
+        'utilities' => $entity->getUtilities(),
+        'cities' => $entity->getCities(),
+        'counties' => $entity->getCounties(),
+        'zipcodes' => $entity->getZipCodes(),
+        'authorities' => $entity->getAuthorities(),
+        'parameterSets' => $entity->getParameterSets(),
+        'technologies' => $entity->getTechnologies(),
+        'sectors' => $entity->getSectors(),
+        'contacts' => $entity->getContacts(),
+
+    ),
+    'scope' => array(
+        'energyCategories' => $this->energyCategories,
+        'sectorMap' => $this->sectors,
+        'detailTemplates' => $this->detailTemplates,
+        'details' => $entity->getDetails(),
+    ),
+)); ?>>
+    <div class="wrapper">
+        <div class="action-bar">
+            <h1>Edit Program</h1>
+        </div>
+    </div>
+    <div class="status-bar">
+        <div class="msg wrapper"><p>Last Updated {{program.lastUpdated}}</p></div>
+    </div>
+    <div class="wrapper edit-program">
+    	
+        <div class="program-form">
+    	   <?php echo $this->fzyForm($this->form); ?>
+           <div class="field"><small><em class="req">*</em> denotes required field</small></div>
+        </div>
+    	<div class="program-controls">
+            <div class="fieldset">
+                <fieldset>
+                    <legend>Program Status</legend>
+                    
+                    <p>Visible to public(<a href="/system/program/detail/{{program.id}}" data-ng-disabled="saving">View</a>): <input type="hidden" data-ui-select2="selectVisibles" data-ng-model="program.isPublished" data-ng-disabled="saving" /></p>
+                    <p>Last Updated: <strong>{{program.lastUpdated}}</strong>
+                        <input type="checkbox" data-ng-checked="program.setLastUpdated" data-ng-click="toggleSetLastUpdated()" name="setLastUpdated" id="setLastUpdated">
+                        <label for="setLastUpdated">Modify Last Updated on Save?</label>
+                    </p>
+                    <div class="buttons">
+                        
+                        <button class="button save" type="button" data-ng-disabled="saving" data-ng-click="save(program)">Save Program</button>
+                        <a class="button naked" href="<?php echo $this->url('home'); ?>" data-ng-disabled="saving"><?php echo $this->translate('Cancel'); ?></a>
+                    </div>
+                    <div data-ng-show="showSaveMessage">
+                        <div class="alert-box success">
+                            <strong>Program saved successfully</strong><br />
+                            <em>It may take up to one minute for search results to update.</em>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+            
+    	</div>
+        <div flyout-menu="contact" class="flyout-menu hide-load">
+                <nav role="navigation" aria-label="Filters" >
+                    <!-- Top level filter list -->
+                    <div flyout-panel="1" data-ng-class="{'active': panel().active}" data-ng-controller="NewContactCtrl" <?php echo $this->fzyNgInit()->addItems($this->contactEntity); ?>>
+                        <h3>{{contact.id && 'Edit' || 'Add New'}} Contact</h3>
+                        <div class="close-btn" data-ng-click="panel().close()"><button type="button" aria-label="back"></button></div>
+                        <div>
+                            <?php echo $this->fzyForm($this->contactForm); ?>
+                            <div class="action-bar">
+                                <div></div>
+                                <div class="buttons">
+                                    <button class="button primary" type="button" data-ng-disabled="saving" data-ng-click="save(contact)">Save Contact</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+        </div>
+        <script type="text/ng-template" id="authority-form">
+            <?php echo $this->fzyForm($this->authorityForm); ?>
+        </script>
+    </div>
+</div>

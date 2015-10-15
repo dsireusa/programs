@@ -1,0 +1,18 @@
+<?php
+/* @var $element \FzyForm\Annotation\FieldSet */
+$element = $this->element;
+$this->inlineScript()
+    ->appendFile('/dist/js/app/controllers/program/DetailCtrl.js');
+//    ->appendFile('/dist/js/app/services/select2/technologies.js');
+?>
+<div class="fieldset" data-ng-controller="DetailCtrl" data-ng-if="details.length || detailTemplates.length">
+    <fieldset>
+        <legend><?php echo $element->getLegend(); ?></legend>
+
+        <div class="field" data-ng-repeat="detail in program.details">
+            <label data-ng-bind="detail.label"></label>
+            <textarea data-ng-model="detail.value" data-ng-disabled="saving"></textarea>
+        </div>
+    </fieldset>
+
+</div>

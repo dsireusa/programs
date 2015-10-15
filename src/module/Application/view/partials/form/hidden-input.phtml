@@ -1,0 +1,9 @@
+<span>
+    <?php
+    /* @var $element \FzyForm\Annotation\Element */
+    $element = $this->element;
+    $open = 'open'.$element->getName();
+    ?>
+    <a href data-ng-click="<?php echo $open ?> = true" data-ng-hide="<?php echo $open ?>"><?php $config = $element->getConfig(); echo isset($config['openText']) ? $config['openText'] : 'Add Custom Text'; ?></a>
+    <span data-ng-show="<?php echo $open ?>"><?php echo $this->render('fzyform/form/element/input.phtml', array('element' => $this->element)); ?></span>
+</span>

@@ -1,0 +1,26 @@
+.news-page {
+
+	.news-primary {
+		@include span-columns(8 of 12);
+		
+		li {
+			padding: 5px 10px;
+			padding-bottom:20px;
+			background: $color_tertiary;
+			margin-bottom: 20px;
+		}
+		.state {
+			display: block;
+		}
+		.button {
+			font-weight: 600;
+		}
+	}
+	.news-sidebar {
+		@include span-columns(4 of 12);
+		.button {
+			font-weight: 600;
+			width: 100%;
+		}
+	}
+}

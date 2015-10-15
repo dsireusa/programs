@@ -1,0 +1,17 @@
+<?php
+	$this->inlineScript()->appendFile('/dist/js/app/services/list.js')
+//        ->appendFile('/dist/js/app/directives/dt-events.js')
+		->appendFile('/dist/js/app/controllers/user/IndexCtrl.js');
+$editUrl = $this->url('home/system/user', array('action' => 'edit'));
+?>
+<div data-ng-controller="IndexCtrl" <?php echo $this->fzyNgInit()->addItems($editUrl); ?>>
+	<div class="wrapper">
+		<div class="action-bar">
+			<h1>User Management</h1>
+			<div class="buttons">
+				<a class="button primary" href="<?php echo $editUrl; ?>">New User</a>
+			</div>
+		</div>
+		<table datatable="" data-dt-events="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover has-action user-table"></table>
+	</div>
+</div>

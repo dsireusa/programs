@@ -1,0 +1,134 @@
+.contact-table {
+	th {
+		text-align:left;
+	}
+}
+.new-contact {
+	.field {
+		margin-bottom: 5px;
+		label + input[type=text] {
+				width: calc(50% - 12.5rem);
+			}
+	}
+	.checkboxes {
+		margin-bottom: 5px;
+		legend {
+			color: #444444;
+		}
+		li {
+			border:none;
+		}
+	}
+	.select2-container {
+		width: calc(50% - 12.5rem);
+		border:1px solid #d0d0d0;
+		top: 0;
+		.select2-choice {
+			height: 35px;
+			line-height: 16px;
+			font-size: 14px;
+			abbr {
+				top:12px;
+			}
+		}
+	}
+	.select2-container-active {
+		border:none;
+	}
+	input {
+		
+		// Checkbox & Radio
+		&[type="checkbox"] + label,
+		&[type="radio"] + label {
+			display: inline-block;
+			cursor: pointer;
+			position: relative;
+			padding:0;
+			padding-left: 25px;
+			margin-right: 15px;
+			font-size: 13px;
+			&:before {
+				content: "";
+				display: inline-block;
+
+				width: 16px;
+				height: 16px;
+
+				margin-right: 10px;
+				position: absolute;
+				left: 0;
+				bottom: 1px;
+				background-color: #f2f2f2;
+			}
+		}
+		&[type="checkbox"] + label {
+			&:before {
+				// border-radius: 8px;
+				border:1px solid darken(#f2f2f2,30%);
+			}
+
+		}
+
+		&[type="radio"] + label {
+			&:before {
+				border-radius: 8px;
+				border:1px solid darken(#f2f2f2,30%);
+			}
+
+		}
+		&[type="checkbox"],
+		&[type="radio"] {
+			
+			display: none;  
+
+		}
+
+		&[type="radio"]:checked + label:before {
+		    background-color: #cc0000;
+		    color: #f3f3f3;
+		    font-size: 32px;
+		    text-align: center;
+		    line-height: 14px;
+		    border:1px solid darken(#cc0000,20%);
+		}
+		&[type="radio"]:checked + label:after {
+			background-color: #fff;
+			content: "";
+			display: inline-block;
+
+			width: 8px;
+			height: 8px;
+			border-radius: 4px;
+			position: absolute;
+			left: 4px;
+			top: 5px;
+		}
+
+		&[type="checkbox"]:checked + label:before {
+		    background-color: #cc0000;
+		    color: #f3f3f3;
+		    font-size: 32px;
+		    text-align: center;
+		    line-height: 14px;
+		    border:1px solid darken(#cc0000,20%);
+		}
+		&[type="checkbox"]:checked + label:after {
+			// background-color: #fff;
+			content: "";
+			display: inline-block;
+
+			width: 7px;
+			height: 12px;
+			// border-radius: 4px;
+			@include transform(rotate(45deg));
+			position: absolute;
+			left: 5px;
+			top: 1px;
+			border-right:3px solid #fff;
+			border-bottom:3px solid #fff;
+		}
+
+		&[type="checkbox"]:focus, &[type="radio"]:focus {}
+
+	}
+}
